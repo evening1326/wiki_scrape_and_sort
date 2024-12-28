@@ -22,8 +22,12 @@ public class App
     {
 
         //List of URLs to parse tables of (change to what is needed)
-        String[] URLs = {"https://en.wikipedia.org/wiki/List_of_Capcom_games:_0-D", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_E-L", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_M", 
-        "https://en.wikipedia.org/wiki/List_of_Capcom_games:_N-R", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_S", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_T-Z"};
+        String[] URLs = {"https://en.wikipedia.org/wiki/List_of_arcade_video_games:_0%E2%80%939", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_A", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_B", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_C",
+                        "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_D", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_E", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_F", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_G", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_H", 
+                        "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_I", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_J", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_K", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_L", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_M", 
+                        "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_N", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_O", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_P", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_Q", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_R", 
+                        "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_S", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_T", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_U", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_V", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_W", 
+                        "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_X", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_Y", "https://en.wikipedia.org/wiki/List_of_arcade_video_games:_Z"};
 
         //List of stored games, to be sorted by release date.
         Map<String, String> games = new TreeMap<>();
@@ -41,14 +45,14 @@ public class App
                 String[] prev_name = {""};
                 int date_type = 0; //0 for FULL, 1 for YEAR
                 String[] prev_date = {"000000009999-99-99-0000"}; //Format used by default when date is FULL formatted as ex. "November 18th, 1984"
-                if(!(doc.select("table tr:eq(0) td:eq(2)").text().equals(""))) //Checks if date format instead is simply just YEAR (ex. 1984)
+                if(!(doc.select("table tr:eq(1) td:eq(2)").text().equals(""))) //Checks if date format instead is simply just YEAR (ex. 1984)
                     {
                         prev_date[0] = "9999";
                         date_type = 1;
                     }
 
                 String[] disp_date = new String[1];
-                String[] system = new String[1];
+                String[] developer = new String[1];
 
                 //Iterate over each row in the table
                 for (Element row: doc.select("table tr"))
@@ -75,7 +79,7 @@ public class App
                         }
                         
                         if(!(date.equals(""))) {prev_date[0] = date;}
-                        system[0] = row.select("td > a").text();
+                        developer[0] = row.select("td:eq(3)").text();
 
                         //For any rows with blank titles, uses the last non-blank title
                         if(!(title.equals("")))
@@ -91,7 +95,7 @@ public class App
                                     {
                                         prev_date[0] = next.select("td span[data-sort-value]").attr("data-sort-value");
                                         disp_date[0] = next.select("td span[data-sort-value]").text();
-                                        system[0] = next.select("td > a").text();
+                                        developer[0] = next.select("td:eq(3)").text();
                                     }
 
                                     next = next.nextElementSibling();
@@ -115,7 +119,7 @@ public class App
                                 {date=date+"1";}
 
                                 //Add data together then add it to the map to be sorted
-                                title = prevName + " - "+disp_date[0]+": "+system[0];
+                                title = prevName + " - "+disp_date[0]+": "+developer[0];
                                 //System.out.println(title);
                                 games.put(date, title);
 

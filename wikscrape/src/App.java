@@ -23,15 +23,15 @@ public class App
     {
 
         //List of URLs to parse tables of (change to what is needed)
-        String[] URLs = {"https://en.wikipedia.org/wiki/List_of_Capcom_games:_0-D", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_E-L", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_M", 
-        "https://en.wikipedia.org/wiki/List_of_Capcom_games:_N-R", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_S", "https://en.wikipedia.org/wiki/List_of_Capcom_games:_T-Z"};
+        String[] URLs = {"https://en.wikipedia.org/wiki/List_of_PlayStation_(console)_games_(A%E2%80%93L)#Games_list_(A%E2%80%93L)",
+                         "https://en.wikipedia.org/wiki/List_of_PlayStation_(console)_games_(M%E2%80%93Z)"};
 
             /* Pretty much everything else you will need to modify with
             some rare exceptions, use this link as a guide: https://jsoup.org/apidocs/org/jsoup/select/Selector.html
         /*--------------------------------------------------------------------*/
         /* */       String titleLoc = "td:eq(0)";                             // 
-        /* */       String dateLoc = "td span[data-sort-value]";              // 
-        /* */       String systemLoc = "td > a";                              // 
+        /* */       String dateLoc = "td:eq(5) span";                         // 
+        /* */       String systemLoc = "td:eq(1)";                            // 
         /*--------------------------------------------------------------------*/ 
 
         //List of stored games, to be sorted by release date.
@@ -50,11 +50,11 @@ public class App
                 String[] prev_name = {""};
                 int date_type = 1; //0 for FULL, 1 for YEAR
                 String[] prev_date = {"9999"}; //Format used by default when date is YEAR formatted as ex. "1984"
-                if(!(doc.select("table tr:eq(1) " + dateLoc).attr("data-sort-value").equals(""))) //Checks if date format instead is the FULL date (ex. "November 18th, 1984")
-                    {
+                // if(!(doc.select("table tr:eq(1) " + dateLoc).attr("data-sort-value").equals(""))) //Checks if date format instead is the FULL date (ex. "November 18th, 1984")
+                //     {
                         prev_date[0] = "000000009999-99-99-0000";
                         date_type = 0;
-                    }
+                    // }
 
                 String[] disp_date = new String[1];
                 String[] system = new String[1];
@@ -89,7 +89,7 @@ public class App
                         }
                         
                         if(!(date.equals(""))) {prev_date[0] = date;}
-                        system[0] = row.select(systemLoc).text();
+                        system[0] = row.select(systemLoc).text() + " (" + row.select("td:eq(2)").text() + ")";
 
                         //For any rows with blank titles, uses the last non-blank title
                         if(!(title.equals("")))
@@ -110,7 +110,6 @@ public class App
 
                                     next = next.nextElementSibling();
                                 }
-                                date = prev_date[0];
                         }
 
                         //If there is no release date, we don't even need it hence skip

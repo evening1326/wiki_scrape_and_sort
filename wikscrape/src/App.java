@@ -114,7 +114,6 @@ public class App
 
                                     next = next.nextElementSibling();
                                 }
-                                date = prev_date[0];
                         }
 
                         //If there is no release date, we don't even need it hence skip

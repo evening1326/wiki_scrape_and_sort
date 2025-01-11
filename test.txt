@@ -4567,39 +4567,5 @@ Elevator Action: Invasion - 2021: UNIS
 Initial D The Arcade - 2021: Sega
 Gitadora - 2022: Konami
 pop'n music Unilab - 2022: Konami
-The Castle - : 
-Golfing Greats - : 
-Grand Cross - : 
-Grand Striker - Human Cup - : 
-Grand Striker 2 - : 
-Grand Tour - : 
-Gulf. Storm - : 
-GunMaster - : 
-GunNail - : NMK
-Gyakuten!! Puzzle Bancho - : 
-Hatch Catch - : 
-Head Panic - Polly & Sally Adventure - : 
-Heart Attack - The A Maze Zing - : 
-Heated Barrel - : 
-High Voltage - : 
-Homura - : 
-Hyper Bishi Bashi Champ - : 
-Hyper Bishi Bashi Champ 2 Player Version - : 
-Hyperdrive - : 
-Iemoto - : 
-IGMO - : 
-Indian Battle - : 
-Interceptor - : 
-International Cup '94 - : 
-Kick Off - Jaleco Cup - : Jaleco
-Kid no Hore Hore Daisakusen - : 
-Kokontouzai Eto Monogatari - : 
-Mug Smashers - : 
-MuHanSeungBu - : 
-Nouryoku Koujou Iinkai - : 
-One Shot One Kill - : Playmark
-Sauro - : 
-Thunder Cross 2 - : Konami
-Wully Bully - : 
 
-Total entries: 4603
+Total entries: 4569

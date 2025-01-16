@@ -98,7 +98,17 @@ public class App
 
                                 //For each title, scan over every date to determine which version came out first (we want to play versions for the original respective platforms)
                                 Element next = row.nextElementSibling();
-                                while(next != null && (next.select(titleTextLoc).text().equals("") || next.select(titleTextLoc).text().equals(prev_name[0])))
+
+                                //Using titleTextLoc would not be applicable here since it could be different from the originally scanned title.
+                                String nextText = " ";
+                                if(next != null)
+                                {
+                                    nextText = next.select(titleLoc + " i a").text();
+                                    if(nextText.equals(""))
+                                        nextText = next.select(titleLoc + " i").text();
+                                }
+
+                                while(next != null && (nextText.equals("") || nextText.equals(prev_name[0])))
                                 {
                                     //System.out.println(next.select(dateLoc).attr("data-sort-value"));
                                     if(!(next.select(dateLoc).attr("data-sort-value").equals("")) && next.select(dateLoc).attr("data-sort-value").compareTo(prev_date[0]) < 0)
@@ -109,6 +119,13 @@ public class App
                                     }
 
                                     next = next.nextElementSibling();
+                                    if(next != null)
+                                    {
+                                        nextText = next.select(titleLoc + " i a").text();
+                                        if(nextText.equals(""))
+                                            nextText = next.select(titleLoc + " i").text();
+                                    }
+
                                 }
                         }
 

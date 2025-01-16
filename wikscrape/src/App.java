@@ -118,6 +118,12 @@ public class App
                                     }
 
                                     next = next.nextElementSibling();
+                                    if(next != null)
+                                    {
+                                        nextText = next.select(titleLoc + " i a").text();
+                                        if(nextText.equals(""))
+                                            nextText = next.select(titleLoc + " i").text();
+                                    }
                                 }
                         }
 
